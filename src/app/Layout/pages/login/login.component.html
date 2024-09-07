@@ -1,0 +1,58 @@
+<section id="loginform">
+    <div class="container">
+@if(errMsg){
+    <div class="alert alert-danger">{{errMsg}}</div>
+}
+<form [formGroup]="loginForm" (ngSubmit)="sendRegisterData()">
+    <div class="row justify-center">
+
+        <div class="col-md-8 ">
+         <h1 class=" mb-5 text-main  text-2xl" >Login Now:</h1>
+
+
+              <div class="form-floating mb-4">
+                <input type="email" class="form-control" id="email" placeholder="" formControlName="email">
+                <label for="email">email:</label>
+                @if(loginForm.get('email')?.errors && loginForm.get('email')?.touched){
+                    <div>
+                     @if(loginForm.get('email')?.errors?.['required']){
+                        <p class="text-danger">Email is Required</p>
+                     }
+                     @if(loginForm.get('email')?.errors?.['email']){
+                        <p class="text-danger">Enter avalid email</p>
+                     }
+             
+                     </div>
+                 }
+              </div>
+              <div class="form-floating mb-4">
+                <input type="password" class="form-control" id="password" placeholder="" formControlName="password">
+                <label for="password">password:</label>
+                @if(loginForm.get('password')?.errors && loginForm.get('password')?.touched){
+                    <div>
+                     @if(loginForm.get('password')?.errors?.['required']){
+                        <p class="text-danger">password is Required</p>
+                     }
+                     @if(loginForm.get('password')?.errors?.['pattern']){
+                        <p class="text-danger">Enter avalid password</p>
+                     }
+                     </div>
+                 }
+              </div>
+
+
+              <div class="form-floating flex justify-end">
+                <button [disabled]="loginForm.invalid" class="btn bg-main text-white" type="submit">Log
+                    @if(isLoading){
+                        <i class="fa-solid fa-spinner fa-spin"></i>
+                      }
+                </button>
+
+              </div>
+        </div>
+    </div>
+</form>
+
+    </div>
+
+</section>

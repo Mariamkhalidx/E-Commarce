@@ -1,0 +1,101 @@
+<section id="registerform">
+    <div class="container">
+@if(errMsg){
+    <div class="alert alert-danger">{{errMsg}}</div>
+}
+<form [formGroup]="RegisterForm" (ngSubmit)="sendRegisterData()">
+    <div class="row justify-center">
+
+        <div class="col-md-8 ">
+         <h1 class=" mb-5 text-main  text-2xl" >Register Now:</h1>
+
+            <div class="form-floating mb-4">
+                <input type="text" class="form-control" id="name" placeholder="" formControlName="name">
+                <label for="name">name:</label>
+                @if(RegisterForm.get('name')?.errors && RegisterForm.get('name')?.touched){
+                    <div>
+                     @if(RegisterForm.get('name')?.errors?.['required']){
+                        <p class="text-danger">Name is Required</p>
+                     }
+                     @if(RegisterForm.get('name')?.errors?.['minlength']){
+                        <p class="text-danger">Name minLength is 3 char</p>
+                     }
+                     @if(RegisterForm.get('name')?.errors?.['maxlength']){
+                        <p class="text-danger">Name maxLength is 10 char</p>
+                     }
+                       
+                     </div>
+                 }
+              </div>
+              <div class="form-floating mb-4">
+                <input type="email" class="form-control" id="email" placeholder="" formControlName="email">
+                <label for="email">email:</label>
+                @if(RegisterForm.get('email')?.errors && RegisterForm.get('email')?.touched){
+                    <div>
+                     @if(RegisterForm.get('email')?.errors?.['required']){
+                        <p class="text-danger">Email is Required</p>
+                     }
+                     @if(RegisterForm.get('email')?.errors?.['email']){
+                        <p class="text-danger">Enter avalid email</p>
+                     }
+             
+                     </div>
+                 }
+              </div>
+              <div class="form-floating mb-4">
+                <input type="password" class="form-control" id="password" placeholder="" formControlName="password">
+                <label for="password">password:</label>
+                @if(RegisterForm.get('password')?.errors && RegisterForm.get('password')?.touched){
+                    <div>
+                     @if(RegisterForm.get('password')?.errors?.['required']){
+                        <p class="text-danger">password is Required</p>
+                     }
+                     @if(RegisterForm.get('password')?.errors?.['pattern']){
+                        <p class="text-danger">Enter avalid password</p>
+                     }
+                     </div>
+                 }
+              </div>
+              <div class="form-floating mb-4">
+                <input type="password" class="form-control" id="rePassword" placeholder="" formControlName="rePassword">
+                <label for="rePassword">Renter Password:</label>
+                @if(RegisterForm.get('rePassword')?.errors && RegisterForm.get('rePassword')?.touched){
+                    <div>
+                     @if(RegisterForm.get('rePassword')?.errors?.['required']){
+                        <p class="text-danger">confirm password is Required</p>
+                     }
+                     @if(RegisterForm.get('rePassword')?.errors?.['pattern']){
+                        <p class="text-danger">Enter avalid confirmedpassword</p>
+                     }
+                     </div>
+                 }
+              </div>
+              <div class="form-floating mb-4">
+                <input type="tel" class="form-control" id="phone" placeholder="" formControlName="phone">
+                <label for="phone">phone:</label>
+                @if(RegisterForm.get('phone')?.errors && RegisterForm.get('phone')?.touched){
+                    <div>
+                     @if(RegisterForm.get('phone')?.errors?.['required']){
+                        <p class="text-danger">phone is Required</p>
+                     }
+                     @if(RegisterForm.get('phone')?.errors?.['pattern']){
+                        <p class="text-danger">Enter avalid phone</p>
+                     }
+                     </div>
+                 }
+              </div>
+              <div class="form-floating flex justify-end">
+                <button [disabled]="RegisterForm.invalid" class="btn bg-main text-white" type="submit">Register
+                    @if(isLoading){
+                        <i class="fa-solid fa-spinner fa-spin"></i>
+                      }
+                </button>
+
+              </div>
+        </div>
+    </div>
+</form>
+
+    </div>
+
+</section>
